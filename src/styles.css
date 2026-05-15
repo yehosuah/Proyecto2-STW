@@ -29,8 +29,13 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
+    linear-gradient(rgba(10, 13, 14, 0.54), rgba(10, 13, 14, 0.7)),
+    image-set(url("/assets/table-felt-a.png") 1x),
     radial-gradient(circle at 18% 12%, rgba(216, 169, 63, 0.18), transparent 28%),
     linear-gradient(135deg, #201c1a 0%, #0f3029 46%, #151413 100%);
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
 
 button {
@@ -88,6 +93,17 @@ button {
   display: grid;
   place-items: center;
   padding: 32px 0;
+  position: relative;
+}
+
+.menu-shell::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background:
+    linear-gradient(rgba(12, 11, 10, 0.22), rgba(12, 11, 10, 0.64)),
+    url("/assets/menu-table.png") center / cover no-repeat;
 }
 
 .menu-panel {
@@ -96,6 +112,8 @@ button {
   border-radius: 8px;
   padding: clamp(28px, 6vw, 56px);
   background:
+    linear-gradient(rgba(17, 44, 38, 0.66), rgba(12, 28, 27, 0.78)),
+    url("/assets/panel-foil.png") center / cover,
     linear-gradient(145deg, rgba(31, 96, 75, 0.92), rgba(16, 39, 35, 0.94)),
     repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 16px);
   box-shadow: var(--shadow);
@@ -207,11 +225,35 @@ button {
 }
 
 .table {
+  position: relative;
   min-height: 620px;
+  overflow: hidden;
   padding: clamp(16px, 3vw, 26px);
   background:
+    linear-gradient(rgba(7, 21, 18, 0.1), rgba(7, 21, 18, 0.38)),
+    url("/assets/table-felt-b.png") center / cover,
     radial-gradient(circle at center, rgba(40, 123, 94, 0.52), transparent 58%),
     linear-gradient(145deg, rgba(12, 45, 38, 0.94), rgba(8, 24, 22, 0.94));
+}
+
+.table::before {
+  position: absolute;
+  right: clamp(14px, 3vw, 34px);
+  bottom: clamp(14px, 3vw, 28px);
+  width: clamp(64px, 9vw, 96px);
+  aspect-ratio: 0.7;
+  border-radius: 8px;
+  content: "";
+  opacity: 0.34;
+  pointer-events: none;
+  transform: rotate(8deg);
+  background: url("/assets/card-back-shadow.png") center / cover;
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.32);
+}
+
+.table > * {
+  position: relative;
+  z-index: 1;
 }
 
 .table__topline,
@@ -260,6 +302,17 @@ button {
     box-shadow 170ms ease,
     border-color 170ms ease,
     filter 170ms ease;
+}
+
+.card::before {
+  position: absolute;
+  inset: 7px;
+  border-radius: 6px;
+  content: "";
+  opacity: 0.08;
+  pointer-events: none;
+  background: url("/assets/card-back-ornate.png") center / cover;
+  mix-blend-mode: multiply;
 }
 
 .card:hover:not(:disabled),
@@ -328,7 +381,27 @@ button {
 }
 
 .score-panel {
+  position: relative;
+  overflow: hidden;
   padding: 18px;
+}
+
+.score-panel::before {
+  position: absolute;
+  top: -26px;
+  right: -18px;
+  width: 86px;
+  aspect-ratio: 0.7;
+  border-radius: 8px;
+  content: "";
+  opacity: 0.2;
+  transform: rotate(-13deg);
+  background: url("/assets/card-back-shadow.png") center / cover;
+}
+
+.score-panel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .score-panel__stats {
@@ -423,7 +496,7 @@ button {
 
 .joker-card {
   display: grid;
-  grid-template-columns: 54px 1fr;
+  grid-template-columns: 64px 1fr;
   gap: 12px;
   width: 100%;
   min-height: 118px;
@@ -432,6 +505,8 @@ button {
   padding: 14px;
   color: var(--paper);
   background:
+    linear-gradient(rgba(18, 20, 28, 0.5), rgba(18, 20, 28, 0.68)),
+    url("/assets/panel-foil.png") center / cover,
     linear-gradient(160deg, rgba(216, 169, 63, 0.22), rgba(78, 128, 188, 0.16)),
     rgba(255, 255, 255, 0.07);
   text-align: left;
@@ -458,14 +533,24 @@ button {
 
 .joker-card__face {
   display: grid;
-  width: 54px;
-  height: 74px;
+  width: 64px;
+  height: 78px;
   place-items: center;
   border-radius: 8px;
+  overflow: hidden;
   color: #241b12;
   background: linear-gradient(180deg, #f4d47a, #c89833);
   font-size: 2rem;
   font-weight: 950;
+  box-shadow:
+    inset 0 0 0 1px rgba(247, 239, 225, 0.24),
+    0 10px 18px rgba(0, 0, 0, 0.28);
+}
+
+.joker-card__face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .joker-card__text {
